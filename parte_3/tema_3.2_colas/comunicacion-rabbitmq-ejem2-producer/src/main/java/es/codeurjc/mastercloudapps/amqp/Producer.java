@@ -8,9 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Producer {
 
-	@Autowired
 	RabbitTemplate rabbitTemplate;
 
+	public Producer(RabbitTemplate rabbit) {
+		super();
+		this.rabbitTemplate = rabbit;
+	}
+	
 	private int numData;
 
 	@Scheduled(fixedRate = 1000)
