@@ -34,13 +34,13 @@ public class BlogController {
 		blogRepository.save(blog);
 	}
 
-	@GetMapping("/blogs")
+	@GetMapping("/blogs/")
 	public List<Blog> getBlogs() throws Exception {
 		return blogRepository.findAll();
 	}
 
 	// Deleting a blog delete its associated comments
-	@GetMapping("/blogs/{id}")
+	@DeleteMapping("/blogs/{id}")
 	public Blog deleteBlog(@PathVariable Long id) {
 		Blog blog = blogRepository.findById(id).orElseThrow();
 		blogRepository.deleteById(id);

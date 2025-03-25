@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class GreetingController {
 
-	@Autowired
 	private UserService usersService;
 
+	public GreetingController(UserService userService) {
+		this.usersService = userService;
+	}
+	
 	@GetMapping("/greeting")
 	public String greeting(Model model) {
 

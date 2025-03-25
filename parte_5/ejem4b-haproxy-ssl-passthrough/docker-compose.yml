@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build: .
+    expose:
+      - "8443" # expose the port to other containers, but it's not exposed to the host
+    restart: unless-stopped # Restart the container. Necessary to avoid problems if the app starts before the db is ready 
+  lb:
+    image: haproxy:2.7.3
+    ports:
+      - "9443:443" # Only service that is exposed to the host is the lb
+      - "9080:8080"
+      - "9090:80" 
+    volumes:
+      - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+    restart: unless-stopped
+    
