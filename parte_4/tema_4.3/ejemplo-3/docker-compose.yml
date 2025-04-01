@@ -1,8 +1,6 @@
 services: 
   web:
-    build: 
-      context: .
-      dockerfile: wait-for-it.Dockerfile
+    build: .
     ports:
       - 8080:8080
     environment:
@@ -10,8 +8,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=password
     depends_on:
-      - db
-    command: ["./wait-for-it.sh", "db:3306", "--", "java", "-jar", "app.jar"]
+      db:
+        condition: service_healthy
   db:
     image: mysql:8.0
     environment:
@@ -19,3 +17,9 @@ services:
       - MYSQL_DATABASE=test
     volumes:
       - ./mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-p$MYSQL_ROOT_PASSWORD"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s

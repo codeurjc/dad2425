@@ -1,7 +1,7 @@
 #################################################
 # Imagen base para el contenedor de compilación
 #################################################
-FROM maven:3.9.0-eclipse-temurin-17 as builder
+FROM maven:3.9.9-eclipse-temurin-21 as builder
 
 # Define el directorio de trabajo donde ejecutar comandos
 WORKDIR /project
@@ -21,17 +21,13 @@ RUN mvn -B -o package -DskipTests
 #################################################
 # Imagen base para el contenedor de la aplicación
 #################################################
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:21-jre
 
 # Define el directorio de trabajo donde se encuentra el JAR
-WORKDIR /usr/src/app/
-
-# Descargamos el script wait-for-it.sh
-RUN curl -LJO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
-    && chmod +x /usr/src/app/wait-for-it.sh
+WORKDIR /usr/app/
 
 # Copia el JAR del contenedor de compilación
-COPY --from=builder /project/target/*.jar /usr/src/app/
+COPY --from=builder /project/target/*.jar /usr/app/
 
 # Indica el puerto que expone el contenedor
 EXPOSE 8080
