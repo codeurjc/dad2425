@@ -2,8 +2,6 @@ package es.sidelab;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.sidelab.model.Anuncio;
+import jakarta.annotation.PostConstruct;
 
 @RestController
 public class AnuncioController {
 	
-	@Autowired
 	private AnuncioRepository repository;
 	
+	public AnuncioController(AnuncioRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
 	@PostConstruct
 	public void init() {
 		Anuncio anuncio = new Anuncio("Mew", "Vendo moto", "Pocos kilómetros");
@@ -39,7 +42,7 @@ public class AnuncioController {
 	}
 	
 	@GetMapping(value = "/anuncio/{name}")
-	public Anuncio getAnuncio(@PathVariable(value = "name") String name) {
+	public Anuncio getAnuncio(@PathVariable String name) {
 		return repository.findByNombre(name);
 	}
 

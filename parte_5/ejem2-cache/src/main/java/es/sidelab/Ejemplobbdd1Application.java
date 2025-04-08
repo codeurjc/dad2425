@@ -18,9 +18,9 @@ public class Ejemplobbdd1Application {
     public static void main(String[] args) {
         SpringApplication.run(Ejemplobbdd1Application.class, args);
     }
-    
+
     @Bean
-    public CacheManager cacheManager() {
+    CacheManager cacheManager() {
     	LOG.info("Activating cache...");
     	return new ConcurrentMapCacheManager("anuncios");
     }

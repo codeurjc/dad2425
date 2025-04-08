@@ -31,7 +31,7 @@ public class AnuncioController {
 	}
 	
 	@GetMapping(value = "/anuncio/{asunto}")
-	public Anuncio getAnuncio(@PathVariable(value = "asunto") String asunto) {
+	public Anuncio getAnuncio(@PathVariable String asunto) {
 		return repository.findByAsunto(asunto);
 	}
 
