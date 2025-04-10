@@ -10,19 +10,15 @@ import org.springframework.data.jpa.repository.Query;
 
 import es.sidelab.model.Anuncio;
 
-@CacheConfig(cacheNames="anuncios")
 public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
 
-	@CacheEvict(allEntries=true)
 	Anuncio save(Anuncio anuncio);
 	
 //	select nombre, asunto, comentario
 //	from anuncios
 //	where nombre = nombreAnuncio
-	@Cacheable
 	Anuncio findByNombre(String nombre);
 	
-	@Cacheable
 	List<Anuncio> findAll();
 	
 }

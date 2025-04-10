@@ -19,7 +19,7 @@ services:
       - ./mysql:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-p$MYSQL_ROOT_PASSWORD"]
-      interval: 3s
-      timeout: 2s
+      interval: 30s
+      timeout: 10s
       retries: 5
-      start_period: 0s
+      start_period: 30s

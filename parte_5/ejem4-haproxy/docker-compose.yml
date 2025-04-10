@@ -6,9 +6,9 @@ services:
       - "8080" # expose the port to other containers, but it's not exposed to the host
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/test
-    links:
-      - db
-    restart: unless-stopped # Restart the container. Necessary to avoid problems if the app starts before the db is ready 
+    depends_on:
+      db:
+        condition: service_healthy
   db:
     image: mysql:8
     environment:
@@ -16,11 +16,19 @@ services:
       - MYSQL_DATABASE=test
       - MYSQL_USER=anuncio
       - MYSQL_PASSWORD=anuncios
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-p$MYSQL_ROOT_PASSWORD"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
   lb:
     image: haproxy:2.7.3
     ports:
       - "9090:80" # Only service that is exposed to the host is the lb 
     volumes:
       - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
-    restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_started
     

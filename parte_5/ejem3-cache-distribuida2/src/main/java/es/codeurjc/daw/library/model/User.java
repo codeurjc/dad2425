@@ -1,11 +1,6 @@
-package es.urjc.code.security;
+package es.codeurjc.daw.library.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -14,7 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity(name = "USERS")
 public class User {
 
 	@Id
@@ -23,7 +18,7 @@ public class User {
 
 	private String name;
 
-	private String passwordHash;
+	private String encodedPassword;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
@@ -31,10 +26,10 @@ public class User {
 	public User() {
 	}
 
-	public User(String name, String password, String... roles) {
+	public User(String name, String encodedPassword, String... roles) {
 		this.name = name;
-		this.passwordHash = new BCryptPasswordEncoder().encode(password);
-		this.roles = new ArrayList<>(Arrays.asList(roles));
+		this.encodedPassword = encodedPassword;
+		this.roles = List.of(roles);
 	}
 
 	public String getName() {
@@ -45,12 +40,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getPasswordHash() {
-		return passwordHash;
+	public String getEncodedPassword() {
+		return encodedPassword;
 	}
 
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setEncodedPassword(String encodedPassword) {
+		this.encodedPassword = encodedPassword;
 	}
 
 	public List<String> getRoles() {
