@@ -1,5 +1,6 @@
 package es.codeurjc.mastercloudapps.amqp;
 
+import org.slf4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Producer {
 
+	Logger logger = org.slf4j.LoggerFactory.getLogger(Producer.class);
 	RabbitTemplate rabbitTemplate;
 
 	public Producer(RabbitTemplate rabbit) {
@@ -23,7 +25,7 @@ public class Producer {
 		ExampleData data = new ExampleData("data " + numData, numData, numData % 2 == 0);
 		numData++;
 
-		System.out.println("publishToQueue: " + data);
+		logger.info("publishToQueue: " + data);
 
 		rabbitTemplate.convertAndSend("messagesJson", data);
 	}
