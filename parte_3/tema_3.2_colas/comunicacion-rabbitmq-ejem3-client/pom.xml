@@ -6,16 +6,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-<<<<<<< HEAD
 		<version>3.5.11</version>
-=======
-		<version>3.5.8</version>
->>>>>>> 0aa10f2 (Add new spring rabbitmq sample with request/response)
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
 	<groupId>es.codeurjc.mastercloudapps</groupId>
-	<artifactId>comunicacion-rabbitmq-ejem2-producer</artifactId>
+	<artifactId>comunicacion-rabbitmq-ejem3-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
 	<properties>
@@ -32,6 +28,23 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-json</artifactId>
         </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -42,4 +55,10 @@
 			</plugin>
 		</plugins>
 	</build>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
 </project>

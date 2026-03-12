@@ -2,22 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
+	<groupId>es.codeurjc.mastercloudapps</groupId>
+	<artifactId>comunicacion-rabbitmq-ejem3-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-<<<<<<< HEAD
 		<version>3.5.11</version>
-=======
-		<version>3.5.8</version>
->>>>>>> 0aa10f2 (Add new spring rabbitmq sample with request/response)
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	
-	<groupId>es.codeurjc.mastercloudapps</groupId>
-	<artifactId>comunicacion-rabbitmq-ejem2-producer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
 		<java.version>17</java.version>
