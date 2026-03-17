@@ -35,3 +35,8 @@ hs_err_pid*
 .vscode
 
 **/mysql
+parte_5/ejem4-haproxy/mydomain.pem
+parte_5/ejem4-haproxy/mydomain.key
+.gitignore
+parte_5/ejem4-haproxy/mydomain.crt
+parte_5/ejem4-haproxy/mydomain.csr
