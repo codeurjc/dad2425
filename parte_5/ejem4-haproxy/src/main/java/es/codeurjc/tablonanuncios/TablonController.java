@@ -1,7 +1,7 @@
 package es.codeurjc.tablonanuncios;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityNotFoundException;
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

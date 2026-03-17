@@ -5,14 +5,16 @@ services:
     expose:
       - "8080" # expose the port to other containers, but it's not exposed to the host
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/test
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db/test
       - SPRING_JPA_HIBERNATE_DDL-AUTO=create
+      - SPRING_DATASOURCE_USERNAME=anuncio
+      - SPRING_DATASOURCE_PASSWORD=anuncios
     scale: 3
     depends_on:
       db:
         condition: service_healthy
   db:
-    image: mysql:8
+    image: mysql:9.6
     environment:
       - MYSQL_ROOT_PASSWORD=pass
       - MYSQL_DATABASE=test
@@ -27,7 +29,7 @@ services:
   lb:
     image: haproxy:3.1
     ports:
-      - "9090:80" # Only service that is exposed to the host is the lb 
+      - "8080:80" # Only service that is exposed to the host is the lb 
     volumes:
       - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
     depends_on:
