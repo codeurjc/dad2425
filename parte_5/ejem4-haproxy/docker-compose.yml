@@ -6,6 +6,8 @@ services:
       - "8080" # expose the port to other containers, but it's not exposed to the host
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/test
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=create
+    scale: 3
     depends_on:
       db:
         condition: service_healthy
@@ -23,7 +25,7 @@ services:
       retries: 5
       start_period: 30s
   lb:
-    image: haproxy:2.7.3
+    image: haproxy:3.1
     ports:
       - "9090:80" # Only service that is exposed to the host is the lb 
     volumes:
