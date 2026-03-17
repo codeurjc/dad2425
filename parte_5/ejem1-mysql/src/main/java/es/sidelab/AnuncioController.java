@@ -19,12 +19,12 @@ public class AnuncioController {
 	@Autowired
 	private AnuncioRepository repository;
 	
-	@GetMapping(value = "/anuncios")
+	@GetMapping(value = "/anuncios/")
 	public List<Anuncio> getAnuncios() {
 		return repository.findAll();
 	}
 	
-	@PostMapping(value = "/anuncios")
+	@PostMapping(value = "/anuncios/")
 	public ResponseEntity<Boolean> addAnuncio(@RequestBody Anuncio anuncio) {
 		repository.save(anuncio);
 		return new ResponseEntity<Boolean>(HttpStatus.CREATED);
