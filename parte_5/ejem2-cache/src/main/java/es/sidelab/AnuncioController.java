@@ -35,7 +35,7 @@ public class AnuncioController {
 		repository.save(anuncio);
 	}
 	
-	@GetMapping(value = "/anuncios")
+	@GetMapping(value = "/anuncios/")
 	@Cacheable
 	public List<Anuncio> getAnuncios() {
 		try {
@@ -46,14 +46,14 @@ public class AnuncioController {
 		return repository.findAll();
 	}
 	
-	@PostMapping(value = "/anuncios")
+	@PostMapping(value = "/anuncios/")
 	@CacheEvict(allEntries=true)
 	public ResponseEntity<Boolean> addAnuncio(@RequestBody Anuncio anuncio) {
 		repository.save(anuncio);
 		return new ResponseEntity<Boolean>(HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value = "/anuncio/{name}")
+	@GetMapping(value = "/anuncios/{name}")
 	@Cacheable
 	public Anuncio getAnuncio(@PathVariable String name) {
 		return repository.findByNombre(name);
