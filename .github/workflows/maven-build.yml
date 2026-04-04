@@ -100,7 +100,6 @@ jobs:
           - 'parte_4/tema_4.2/ejer8'
           
           # Parte 4 - Docker Projects
-          - 'parte_4/tema_4.3/ejemplo-0-drupal'
           - 'parte_4/tema_4.3/ejemplo-1'
           - 'parte_4/tema_4.3/ejemplo-2'
           - 'parte_4/tema_4.3/ejemplo-3'
@@ -115,7 +114,6 @@ jobs:
           - 'parte_5/ejem3-cache-distribuida2'
           - 'parte_5/ejem4-haproxy'
           - 'parte_5/ejem4b-haproxy-ssl-passthrough'
-          - 'parte_5/ejem5-jmeter'
       
       fail-fast: false
     
