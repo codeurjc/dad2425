@@ -1,0 +1,59 @@
+name: Manual Spring Boot & Java Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      springboot_version:
+        description: 'Versión de Spring Boot (ej: 3.4.1)'
+        required: true
+        default: '3.4.1'
+      java_version:
+        description: 'Versión de Java (ej: 17, 21)'
+        required: true
+        default: '17'
+
+jobs:
+  update-project-stack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ github.event.inputs.java_version }}
+          distribution: 'temurin'
+
+      - name: Update Spring Boot Parent Version
+        run: |
+          # Actualiza la versión dentro del bloque parent de Spring Boot
+          find . -name "pom.xml" -exec sed -i "/<artifactId>spring-boot-starter-parent<\/artifactId>/!b;n;s/<version>.*<\/version>/<version>${{ github.event.inputs.springboot_version }}<\/version>/" {} +
+
+      - name: Update Java Version Property
+        run: |
+          # Actualiza la propiedad <java.version> en todos los poms
+          find . -name "pom.xml" -exec sed -i "s/<java.version>.*<\/java.version>/<java.version>${{ github.event.inputs.java_version }}<\/java.version>/" {} +
+          
+          # Opcional: Actualizar también maven.compiler.source/target si existen
+          find . -name "pom.xml" -exec sed -i "s/<maven.compiler.source>.*<\/maven.compiler.source>/<maven.compiler.source>${{ github.event.inputs.java_version }}<\/maven.compiler.source>/" {} +
+          find . -name "pom.xml" -exec sed -i "s/<maven.compiler.target>.*<\/maven.compiler.target>/<maven.compiler.target>${{ github.event.inputs.java_version }}<\/maven.compiler.target>/" {} +
+
+      - name: Verify Updates
+        run: |
+          echo "Verificando cambios en el primer pom.xml encontrado:"
+          FIRST_POM=$(find . -name "pom.xml" | head -n 1)
+          grep -E "spring-boot-starter-parent|java.version|version" $FIRST_POM | head -n 15
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "upgrade: Spring Boot to ${{ github.event.inputs.springboot_version }} and Java to ${{ github.event.inputs.java_version }}"
+          title: "Upgrade Stack: Spring Boot ${{ github.event.inputs.springboot_version }} / Java ${{ github.event.inputs.java_version }}"
+          body: |
+            Actualización automática del stack tecnológico:
+            - **Spring Boot:** ${{ github.event.inputs.springboot_version }}
+            - **Java:** ${{ github.event.inputs.java_version }}
+            
+            Revisar posibles errores de compilación en los logs de esta acción.
+          branch: "upgrade-stack-${{ github.event.inputs.springboot_version }}-java${{ github.event.inputs.java_version }}"
