@@ -1,6 +1,6 @@
 # Desarrollo de Aplicaciones Distribuidas
 
-En este repositorio se encuentra el código con ejemplos y ejercicios resueltos de las diferentes partes de la asignatura "Desarrollo de Aplicaciones Distribuidas" del Grado en Ingeniería de Computadores de la ETSII URJC.
+En este repositorio se encuentra el código con ejemplos y ejercicios resueltos de las diferentes partes de la asignatura "Desarrollo de Aplicaciones Distribuidas" del Grado en Ingeniería de Computadores de la ETSII de la URJC.
 
 El contenido del repositorio se distribuye bajo licencia [Apache-2.0](https://github.com/codeurjc/dad2425/blob/main/LICENSE).
 
