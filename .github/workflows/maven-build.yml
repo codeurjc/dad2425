@@ -45,8 +45,6 @@ jobs:
           - 'parte_2/tema_2.3_rest/rest_ejem9'
           - 'parte_2/tema_2.3_rest/rest_ejem10'
           - 'parte_2/tema_2.3_rest/rest_ejem11'
-          - 'parte_2/tema_2.3_rest/rest_front-ejem1'
-          - 'parte_2/tema_2.3_rest/rest_front-ejem2'
           - 'parte_2/tema_2.3_rest/rest_ejer1'
           
           # Parte 2 - Database Projects
