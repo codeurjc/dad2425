@@ -100,7 +100,8 @@ jobs:
           - 'parte_4/tema_4.2/ejer8'
           
           # Parte 4 - Docker Projects
-          - 'parte_4/tema_4.3/ejemplo-1'
+          - 'parte_4/tema_4.3/ejemplo-1/comunicacion-rabbitmq-ejem2-consumer'
+          - 'parte_4/tema_4.3/ejemplo-1/comunicacion-rabbitmq-ejem2-producer'
           - 'parte_4/tema_4.3/ejemplo-2'
           - 'parte_4/tema_4.3/ejemplo-3'
           - 'parte_4/tema_4.3/ejercicio-1-enunciado'
