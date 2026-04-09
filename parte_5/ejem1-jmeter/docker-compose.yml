@@ -16,8 +16,9 @@ services:
       resources:
         limits:
           cpus: '1.0'
-          memory: 512m
+          memory: 1G
 
+  # Topología sin caché. App ejem1
   # spring-app:
   #   build: ./ejem-1
   #   environment:
@@ -35,6 +36,7 @@ services:
   #         cpus: '1.0'
   #         memory: 512m
 
+  # Topología Caché en memoria. App ejem2-cache-spring
   # spring-app:
   #   build: ./ejem-2-cache
   #   environment:
@@ -52,6 +54,7 @@ services:
   #         cpus: '1.0'
   #         memory: 512m
 
+  # Topología balanceador de carga y caché en memoria. App ejem2-cache-redis
   # spring-app: 
   #   build: ./ejem-2-cache
   #   environment:
@@ -68,6 +71,7 @@ services:
   #         cpus: '1.0'
   #         memory: 512m
 
+  # Topología balanceador de carga y caché en Redis. App ejem2-cache-redis
   spring-app:
     build: ./ejem-2-cache-redis
     environment:
@@ -80,7 +84,7 @@ services:
       mysql-db:
         condition: service_healthy
     deploy:
-      replicas: 3 # Con LB
+      replicas: 1 # Con LB
       resources:
         limits:
           cpus: '1.0'
