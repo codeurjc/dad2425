@@ -3,6 +3,7 @@ package es.codeurjc.board.controller;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 
 import jakarta.annotation.PostConstruct;
@@ -54,11 +55,38 @@ public class PostController {
 
 	@GetMapping("/")
 	@Cacheable("posts")
-	public Page<Post> getPosts(@RequestParam(required = false) Pageable pageRequest) {
+	public PagedPostsDto getPosts(@RequestParam(required = false) Pageable pageRequest) {
 		if(pageRequest == null) {
-			pageRequest = PageRequest.of(0, 10);
+			pageRequest = PageRequest.of(0, 100);
 		}
-		return posts.findAll(pageRequest);
+		Page<Post> page = posts.findAll(pageRequest);
+		return new PagedPostsDto(toPostDto(page), page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+	}
+	
+	private List<PostDto> toPostDto(Page<Post> page) {
+		return page
+				.getContent()
+				.stream()
+				.map((Post p) -> new PostDto(
+						p.getId(), 
+						p.getUsername(), 
+						p.getTitle(), 
+						p.getText(), 
+						toCommentDto(p.getComments())))
+				.toList();
+	}
+	
+	private List<CommentDto> toCommentDto(List<Comment> comments) {
+		if(comments == null) {
+			return Collections.emptyList();
+		}
+		return comments
+				.stream()
+				.map((Comment c) -> new CommentDto(
+						c.getId(), 
+						c.getUsername(), 
+						c.getComment()))
+				.toList();
 	}
 
 	@GetMapping("/{id}")
