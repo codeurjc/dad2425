@@ -26,7 +26,7 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Controlador Bucle" enabled="true">
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Controlador Bucle">
           <stringProp name="LoopController.loops">20</stringProp>
         </LoopController>
         <hashTree>
@@ -158,7 +158,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph">
+        <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
