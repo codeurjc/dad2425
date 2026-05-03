@@ -41,14 +41,10 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 
-		<!-- Hazelcast for distributed session storage -->
+		<!-- Distributed session storage -->
 		<dependency>
 			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-hazelcast</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.hazelcast</groupId>
-			<artifactId>hazelcast</artifactId>
+			<artifactId>spring-session-jdbc</artifactId>
 		</dependency>
 
 	</dependencies>
